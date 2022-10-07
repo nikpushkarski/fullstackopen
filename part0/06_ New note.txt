@@ -1,0 +1,20 @@
+title  Exercise 06: New note
+
+note over browser:
+a user enters text 
+and hits the "Save" button
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over browser:
+the browser updates 
+the DOM with a note 
+without reloading the page
+end note
+
+note over server:
+the server updates the 
+data.json file with 
+the received note
+end note
