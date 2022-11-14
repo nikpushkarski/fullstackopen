@@ -8,7 +8,10 @@ const Button = ({ handleClick, text }) => (
 
 
 const StatisticLine = ({ text, value }) => (
-  <p>{text} {value}</p>
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 )
 
 const Statistics = ({ values }) => {
@@ -17,12 +20,16 @@ const Statistics = ({ values }) => {
     values.badVal > 0) {
       return (
         <>
-          <StatisticLine text={values.goodStr} value={values.goodVal}/>
-          <StatisticLine text={values.neutralStr} value={values.neutralVal}/>
-          <StatisticLine text={values.badStr} value={values.badVal}/>
-          <StatisticLine text={values.allStr} value={values.goodVal + values.neutralVal + values.badVal}/>
-          <StatisticLine text={values.avgStr} value={(values.goodVal - values.badVal) / 10}/>
-          <StatisticLine text={values.percentStr} value={values.goodVal / (values.badVal + values.neutralVal + values.goodVal) * 100}/>
+          <table>
+            <tbody>
+              <StatisticLine text={values.goodStr} value={values.goodVal}/>
+              <StatisticLine text={values.neutralStr} value={values.neutralVal}/>
+              <StatisticLine text={values.badStr} value={values.badVal}/>
+              <StatisticLine text={values.allStr} value={values.goodVal + values.neutralVal + values.badVal}/>
+              <StatisticLine text={values.avgStr} value={(values.goodVal - values.badVal) / 10}/>
+              <StatisticLine text={values.percentStr} value={values.goodVal / (values.badVal + values.neutralVal + values.goodVal) * 100}/>
+            </tbody>
+          </table>
         </>
       )
   }
