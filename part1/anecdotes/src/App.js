@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const Header = ({ text }) => <h2>{text}</h2>
+
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 )
@@ -27,12 +29,21 @@ const App = () => {
     setPoints(newPoints)
   }
 
+  const maxPoints = Math.max(...points)
+
+  const maxPointsIndex = points.indexOf(maxPoints)
+  
   return (
     <>
+      <Header text="Anecdote of the day"/>
       <p>{anecdotes[selected]}</p>
       <p><b>Points:</b> {points[selected]}</p>
       <Button handleClick={handleVote} text="vote"/>
-      <Button handleClick={handleNextAnecdote} text="next anecdote"/>
+      <Button handleClick={handleNextAnecdote} text="next anecdote" />
+      
+      <Header text="Anecdote with most votes" />
+      <p>{anecdotes[maxPointsIndex]}</p>
+      <p><b>Points:</b> {maxPoints}</p>
     </>
   )
 }
