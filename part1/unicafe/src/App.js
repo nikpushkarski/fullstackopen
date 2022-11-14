@@ -6,7 +6,25 @@ const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 )
 
-const Stats = ({ statValue }) => <p>{statValue}</p>
+const Statistics = ({ values }) => {
+  if (values.goodVal > 0 ||
+    values.neutralVal > 0 ||
+    values.badVal > 0) {
+      return (
+        <>
+          <p>{values.goodStr} {values.goodVal}</p>
+          <p>{values.neutralStr} {values.neutralVal}</p> 
+          <p>{values.badStr} {values.badVal}</p> 
+          <p>{values.allStr} {values.goodVal + values.neutralVal + values.badVal}</p> 
+          <p>{values.avgStr} {(values.goodVal - values.badVal) / 10}</p> 
+          <p>{values.percentStr} {values.goodVal / (values.badVal + values.neutralVal + values.goodVal) * 100}</p> 
+        </>
+      )
+  }
+  return (
+    <p>No feedback given</p>
+  )
+} 
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -24,19 +42,31 @@ const App = () => {
   const handleBadClick = () => {
     setBad(bad + 1)
   }
+
+  const values = {
+    goodStr: 'good',
+    neutralStr: 'neutral',
+    badStr: 'bad',
+    allStr: 'all',
+    avgStr: 'averages score',
+    percentStr: 'positive feedback, %',
+    goodVal: good,
+    neutralVal: neutral,
+    badVal: bad
+  }
   
 
   return (
     <>
-      <Header header="give feedback" />
+      <Header header="give feedback"/>
       <Button handleClick={handleGoodClick} text="good"/>
       <Button handleClick={handleNeutralClick} text="neutral"/>
       <Button handleClick={handleBadClick} text="bad" />
       
       <Header header="statistics" />
-      <Stats statValue={good}/>
-      <Stats statValue={neutral}/>
-      <Stats statValue={bad}/>
+      <Statistics values={values}
+      />
+      
     </>
   );
 }
