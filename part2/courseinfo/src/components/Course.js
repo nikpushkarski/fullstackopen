@@ -1,6 +1,7 @@
 const Course = ({ course }) => {
-  let total = 0
-  course.parts.map(part => total += part.exercises)
+  const total = course.parts.reduce(
+    (acc, part) => acc + part.exercises, 0
+  )
   return (
     <>
       <h2>{course.name}</h2>
